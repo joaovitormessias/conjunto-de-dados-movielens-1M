@@ -1,87 +1,46 @@
-# 🎬 Desafio: Análise de Dados do Conjunto de Dados do MovieLens 1M
+# MovieLens 1M — Rating Patterns
 
-## 📌 Sobre o Projeto
-Fomos contratados por uma plataforma de filmes online para realizar a análise dos dados do **MovieLens 1M**.
+**Explore movie-rating distributions, group means, and disagreement using relational joins in pandas.**
 
-O [GrupoLens Research](https://grouplens.org/datasets/movielens) fornece diversas coleções de avaliações de filmes feitas por usuários do MovieLens no final dos anos 1990 e início dos anos 2000. O conjunto de dados inclui:
-- **Avaliações de filmes** ⭐
-- **Metadados** (gênero e ano de lançamento) 🎭
-- **Informações demográficas dos usuários** (idade, código postal, gênero e profissão) 👥
+An educational analysis of the MovieLens 1M dataset. The notebook joins users, ratings, and movie metadata, filters sparse titles, and compares rating patterns. It is not a recommendation engine or evidence of a commercial engagement.
 
-Nosso objetivo como analistas de dados é explorar, limpar e extrair insights relevantes a partir dessas informações.
+## Dataset and reproduced results
 
----
+| Measure | Value |
+| --- | --- |
+| Ratings | 1,000,209 |
+| Users | 6,040 |
+| Movie metadata records | 3,883 |
+| Titles with at least 250 ratings | 1,216 |
 
-## 🛠 Etapas da Análise
+These counts were recomputed during review. The 250-rating threshold applies to total ratings per title, not to each demographic subgroup.
 
-1. **Visualização dos Dados** 📊
-   - Compreender a distribuição e estrutura dos dados.
-   - Explorar padrões e tendências iniciais.
-   
-2. **Tratamento dos Dados** 🧼
-   - Identificar e corrigir inconsistências.
-   - Padronizar e estruturar os dados para análise.
+## Run locally
 
-3. **Obtenção de Métricas** 📈
-   - Extrair insights significativos.
-   - Realizar análises estatísticas e comparativas.
-
----
-
-## 🚀 Configuração do Ambiente
-
-Para rodar o projeto localmente, siga os passos abaixo.
-
-### 🔹 Requisitos
-- **Anaconda** (recomendado) ou **Jupyter Notebook**
-- **Python 3.9+**
-
-### 🔹 Instalação do Ambiente
-1. Baixe e instale o [Anaconda](https://www.anaconda.com/products/distribution).
-2. Crie um novo ambiente virtual:
-   ```sh
-   conda create -n movielens python=3.9
-   ```
-3. Ative o ambiente:
-   ```sh
-   conda activate movielens
-   ```
-4. Importe as bibliotecas necessárias:
-   ```sh
-   import pandas  
-   ```
-
-### 🔹 Executando o Projeto
-Para abrir o Jupyter Notebook e executar a análise, utilize:
-```sh
-jupyter notebook
+```bash
+git clone https://github.com/joaovitormessias/conjunto-de-dados-movielens-1M.git
+cd conjunto-de-dados-movielens-1M
+python -m venv .venv
+source .venv/bin/activate
+pip install pandas jupyter
+jupyter notebook ConjuntoMovieLens1M.ipynb
 ```
-Isso abrirá o navegador, permitindo a interação com os dados.
 
----
+Run all cells from the repository directory. Data files are included. The loaders use relative paths, the `::` separator, and Latin-1 encoding. The rating time field is named `timestamp`; it is not a movie duration.
 
-## 📚 Tecnologias Utilizadas
-- **Anaconda + Jupyter Notebook** → Ambiente de desenvolvimento
-- **Pandas** → Manipulação e análise de dados
+## Technical walkthrough
 
----
+- [Notebook](ConjuntoMovieLens1M.ipynb): loading, joins, pivot tables, minimum-count filtering, and rating dispersion.
+- [users.dat](users.dat): historical user attributes.
+- [ratings.dat](ratings.dat): user/movie ratings with timestamps.
+- [movies.dat](movies.dat): title and genre metadata.
 
-## 🤝 Contribuição
+Comparing averages without checking sample size can overstate a group's preference. Treat the notebook's group labels as the dataset's historical categories, not comprehensive descriptions of identity or evidence of causation.
 
-Se deseja contribuir para o projeto, siga os passos:
-1. Faça um fork do repositório.
-2. Crie uma nova branch: `git checkout -b minha-melhoria`
-3. Realize suas alterações e commit: `git commit -m 'Melhoria na análise'`
-4. Envie suas mudanças: `git push origin minha-melhoria`
-5. Abra um Pull Request.
+## Verification and limits
 
----
+All 24 nonempty code cells executed in order during review. There is no predictive evaluation, fairness audit, or causal experiment. Dependencies are not locked. The dataset is historical and self-selected; findings do not generalize automatically to today's audience.
 
-## 📜 Licença
+Code is distributed under the repository's [MIT license](LICENSE). Dataset terms and attribution are separate: consult [GroupLens MovieLens](https://grouplens.org/datasets/movielens/1m/).
 
-Este projeto está licenciado sob a **MIT License** - consulte o arquivo `LICENSE` para mais detalhes.
-
----
-
-🚀 *Desenvolvido como parte de um desafio de análise de dados.*
-
+[Maintainer](https://github.com/joaovitormessias)
